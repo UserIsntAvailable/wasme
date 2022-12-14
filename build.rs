@@ -8,7 +8,9 @@ use std::{
 use toml::Value;
 use wasm_pack::command::build::{Build, BuildOptions, Target};
 
-static GEN_PATH: Lazy<PathBuf> = Lazy::new(|| PathBuf::from("gen-wasm/"));
+// TODO: wasm-pack `src`.
+
+static GEN_PATH: Lazy<PathBuf> = Lazy::new(|| PathBuf::from("dist/"));
 
 fn main() -> Result<()> {
     let package: Value = include_str!("Cargo.toml").parse()?;
@@ -38,7 +40,7 @@ fn generate_wasm_files(package: &Value) -> Result<()> {
         .to_owned();
 
     let mut command = Build::try_from_opts(BuildOptions {
-        path: Some(PathBuf::from("src/")),
+        path: Some(PathBuf::from("scripts/")),
         disable_dts: true,
         target: Target::NoModules,
         out_name: Some(package_name.clone()),

@@ -7,6 +7,7 @@ edition = "2021"
 
 [package.metadata.manifest_json]
 manifest_version = 2
+permissions = ["storage"]
 
 # TODO: include `icons`.
 
@@ -15,8 +16,12 @@ content_scripts = [{ "matches" = ["*://github.com/*"], "js" = ["wasme.js"] }]
 web_accessible_resources = ["wasme_bg.wasm"]
 
 [lib]
-path = "./src/.build-mark.rs"
+path = "./scripts/.build-mark.rs"
 crate-type = ["cdylib"]
+
+# FIX: Why do I need this to build?
+[dependencies]
+yew = { version = "0.20.0", features = ["csr"] }
 
 [build-dependencies]
 eyre = "0.6.8"
@@ -26,4 +31,4 @@ toml = { version = "0.5.9", features = ["preserve_order"] }
 wasm-pack = "0.10.3"
 
 [workspace]
-members = ["src"]
+members = ["src", "scripts"]

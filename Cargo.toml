@@ -1,6 +1,29 @@
 [package]
 name = "wasme"
+description = "A Session Manager Extension written in Web Assembly with Rust."
+homepage = "https://github.com/UserIsntAvailable/wasme"
 version = "0.1.0"
 edition = "2021"
 
-[dependencies]
+[package.metadata.manifest_json]
+manifest_version = 2
+
+# TODO: include `icons`.
+
+content_scripts = [{ "matches" = ["*://github.com/*"], "js" = ["wasme.js"] }]
+# TODO: I could improve `build.rs` to add this automatically.
+web_accessible_resources = ["wasme_bg.wasm"]
+
+[lib]
+path = "./src/.build-mark.rs"
+crate-type = ["cdylib"]
+
+[build-dependencies]
+eyre = "0.6.8"
+once_cell = "1.16.0"
+serde_json = { version = "1.0.89", features = ["preserve_order"] }
+toml = { version = "0.5.9", features = ["preserve_order"] }
+wasm-pack = "0.10.3"
+
+[workspace]
+members = ["src"]

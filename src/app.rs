@@ -1,8 +1,8 @@
 use yew::prelude::*;
 
-#[function_component(App)]
-pub fn app() -> Html {
+#[function_component]
+pub fn App() -> Html {
     html! {
-        <h1>{ "Hello, World" }</h1>
+        <h1>{"Hello, World"}</h1>
     }
 }

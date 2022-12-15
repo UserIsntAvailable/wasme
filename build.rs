@@ -2,13 +2,11 @@ use eyre::Result;
 use once_cell::sync::Lazy;
 use serde_json::{json, to_writer_pretty};
 use std::{
-    fs::{create_dir_all, read_to_string, remove_dir_all, write, File},
+    fs::{create_dir_all, read_to_string, write, File},
     path::PathBuf,
 };
 use toml::Value;
 use wasm_pack::command::build::{Build, BuildOptions, Target};
-
-// TODO: wasm-pack `src`.
 
 static GEN_PATH: Lazy<PathBuf> = Lazy::new(|| PathBuf::from("dist/"));
 
@@ -16,19 +14,13 @@ fn main() -> Result<()> {
     let package: Value = include_str!("Cargo.toml").parse()?;
     let package = &package["package"];
 
-    clean_gen_files()?;
+    create_dir_all(GEN_PATH.as_path())?;
+    // TODO: Package with `trunk build --release` the `src`.
+    //
+    // Remember to package it before `wasm-pack`, because `trunk` removes all files in the
+    // directory.
     generate_wasm_files(package)?;
     generate_manifest_json(package)?;
-
-    Ok(())
-}
-
-fn clean_gen_files() -> Result<()> {
-    if GEN_PATH.exists() {
-        remove_dir_all(GEN_PATH.as_path())?;
-    }
-
-    create_dir_all(GEN_PATH.as_path())?;
 
     Ok(())
 }
@@ -39,6 +31,7 @@ fn generate_wasm_files(package: &Value) -> Result<()> {
         .expect("package.name is set.")
         .to_owned();
 
+    // FIX: Will the `trunk` dist folder work for the html web extension?
     let mut command = Build::try_from_opts(BuildOptions {
         path: Some(PathBuf::from("scripts/")),
         disable_dts: true,

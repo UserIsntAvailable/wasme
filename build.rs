@@ -11,16 +11,21 @@ use wasm_pack::command::build::{Build, BuildOptions, Target};
 static GEN_PATH: Lazy<PathBuf> = Lazy::new(|| PathBuf::from("dist/"));
 
 fn main() -> Result<()> {
-    let package: Value = include_str!("Cargo.toml").parse()?;
-    let package = &package["package"];
+    let env: Option<&'static str> = option_env!("WASME_IGNORE_BUILD_SCRIPT");
+    let env = env.unwrap_or_else(|| "false");
 
-    create_dir_all(GEN_PATH.as_path())?;
-    // TODO: Package with `trunk build --release` the `src`.
-    //
-    // Remember to package it before `wasm-pack`, because `trunk` removes all files in the
-    // directory.
-    generate_wasm_files(package)?;
-    generate_manifest_json(package)?;
+    if env.to_uppercase() != "TRUE".to_owned() {
+        let package: Value = include_str!("Cargo.toml").parse()?;
+        let package = &package["package"];
+
+        create_dir_all(GEN_PATH.as_path())?;
+        // TODO: Package with `trunk build --release` the `src`.
+        //
+        // Remember to package it before `wasm-pack`, because `trunk` removes all files in the
+        // directory.
+        generate_wasm_files(package)?;
+        generate_manifest_json(package)?;
+    };
 
     Ok(())
 }

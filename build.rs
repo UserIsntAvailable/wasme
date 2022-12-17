@@ -12,9 +12,8 @@ static GEN_PATH: Lazy<PathBuf> = Lazy::new(|| PathBuf::from("dist/"));
 
 fn main() -> Result<()> {
     let env: Option<&'static str> = option_env!("WASME_IGNORE_BUILD_SCRIPT");
-    let env = env.unwrap_or_else(|| "false");
 
-    if env.to_uppercase() != "TRUE".to_owned() {
+    if env.unwrap_or_else(|| "false").to_uppercase() != "TRUE".to_owned() {
         let package: Value = include_str!("Cargo.toml").parse()?;
         let package = &package["package"];
 

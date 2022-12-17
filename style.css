@@ -1,5 +1,18 @@
 :root {
-    --c-darker: rgb(0, 0, 0)
+    --c-l-primary-400: rgb(195, 250, 255);
+    --c-l-accent-100: rgb(66, 135, 245);
+
+    --c-black-darker: rgb(0, 0, 0);
+
+    --s-100: .25rem;
+    --s-200: .5rem;
+    --s-300: .75rem;
+    --s-400: 1rem;
+    --s-500: 1.5rem;
+    --s-600: 2rem;
+    --s-700: 3rem;
+    --s-800: 4rem;
+    --s-900: 5rem;
 }
 
 /* https://piccalil.li/blog/a-modern-css-reset */
@@ -66,35 +79,56 @@ picture {
 
 /* utilities */
 
+/* TODO: container styling */
 .container {
     /* padding: .35rem 0.5rem .25rem 0.5rem; */
-    /* --max-width: 112rem; */
-    /* --padding: 1rem; */
-    /**/
-    /* margin-inline: auto; */
-    /* width: min(var(--max-width), 100% - (var(--padding) * 2)); */
+    --max-width: 120rem;
+    --padding: 1rem;
+
+    margin-inline: auto;
+    width: min(var(--max-width), 100% - (var(--padding) * 2));
 }
 
 body {
-    color: var(--c-darker);
+    color: var(--c-black-darker);
     font-family: monospace;
     font-size: 14px;
 }
 
+/* header */
+
 .primary-header {
-    background-color: rgb(0, 255, 255);
+    background-color: var(--c-l-primary-400);
+}
+
+/* search bar */
+
+.header-search-bar {
+    border-radius: 100vmax;
+    border: 0;
+    padding: var(--s-100) var(--s-300);
+    width: 26rem;
+}
+
+.header-search-bar:focus {
+    border: 2px solid var(--c-l-accent-100);
+    outline: none;
+}
+
+.header-search-bar::placeholder {
+    opacity: .25;
 }
 
 /* navigation */
 
 .nav-flex {
-    /* align-items: center; */
+    align-items: center;
     display: flex;
     justify-content: space-between;
 }
 
 .nav-logo {
-    color: var(--c-darker);
+    color: var(--c-black-darker);
     font-size: 35px;
     font-weight: bold;
     line-height: 1;
@@ -103,7 +137,7 @@ body {
 
 .nav-button-list {
     display: flex;
-    gap: 1rem;
+    gap: var(--s-400);
 }
 
 .nav-button {
@@ -112,5 +146,22 @@ body {
     cursor: pointer;
     display: flex;
     text-decoration: none;
-    width: 2rem;
+    width: var(--s-600);
+}
+
+/* main grid */
+
+.main-grid {
+    display: grid;
+    gap: var(--s-400);
+    grid-template-columns: 15% auto;
+    text-align: center;
+}
+
+.main-sessions {
+    background-color: red;
+}
+
+.main-tabs {
+    background-color: orange;
 }

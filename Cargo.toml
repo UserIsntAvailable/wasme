@@ -15,10 +15,6 @@ content_scripts = [{ "matches" = ["*://github.com/*"], "js" = ["wasme.js"] }]
 # TODO: I could improve `build.rs` to add this automatically.
 web_accessible_resources = ["wasme_bg.wasm"]
 
-[lib]
-path = "./scripts/.build-mark.rs"
-crate-type = ["cdylib"]
-
 [[bin]]
 name = "wasme-ext"
 path = "src/main.rs"

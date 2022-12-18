@@ -1,7 +1,23 @@
 :root {
-    --c-l-primary-400: rgb(195, 250, 255);
-    --c-l-accent-100: rgb(66, 135, 245);
-    --c-neutral-900: rgb(0, 0, 0);
+    --c-primary-300: hsl(190 90% 90%);
+    --c-primary-350: hsl(190 90% 80%);
+    --c-primary-400: hsl(190 90% 70%);
+    --c-primary-500: hsl(190 90% 50%);
+    --c-primary-500: hsl(190 90% 30%);
+
+    --c-neutral-100: hsl(0, 0%, 100%);
+    --c-neutral-900: hsl(0, 0%, 0%);
+
+    --ff-primary: monospace;
+    --ff-body: var(--ff-primary);
+    --ff-heading: var(--ff-primary);
+
+    --fw-regular: 400;
+    --fw-bold: 500;
+    --fw-bolder: 700;
+
+    --fs-400: 1rem;
+    --fs-700: 2rem;
 
     --s-100: .25rem;
     --s-200: .5rem;
@@ -76,26 +92,28 @@ picture {
     }
 }
 
-/* utilities */
-
-.container {
-    --max-width: 120rem;
-    --padding: 1rem;
-
-    margin-inline: auto;
-    width: min(var(--max-width), 100% - (var(--padding) * 2));
-}
+/* globals */
 
 body {
     color: var(--c-neutral-900);
-    font-family: monospace;
-    font-size: var(--s-400);
+    font-family: var(--ff-body);
+    font-size: var(--fs-400);
 }
 
 /* header */
 
-.primary-header {
-    background-color: var(--c-l-primary-400);
+.header-flex {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-logo {
+    color: var(--c-neutral-900);
+    font-size: var(--fs-700);
+    font-weight: var(--fw-bolder);
+    line-height: 1;
+    text-decoration: none;
 }
 
 /* search bar */
@@ -108,7 +126,6 @@ body {
 }
 
 .header-search-bar:focus {
-    border: 1px solid var(--c-l-accent-100);
     outline: none;
 }
 
@@ -116,28 +133,14 @@ body {
     opacity: .25;
 }
 
-/* navigation */
+/* button list */
 
-.nav-flex {
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
-}
-
-.nav-logo {
-    color: var(--c-neutral-900);
-    font-size: var(--s-600);
-    font-weight: bold;
-    line-height: 1;
-    text-decoration: none;
-}
-
-.nav-button-list {
+.header-button-list {
     display: flex;
     gap: var(--s-400);
 }
 
-.nav-button {
+.header-button {
     background-color: transparent;
     border: 0;
     cursor: pointer;
@@ -146,10 +149,12 @@ body {
     width: var(--s-600);
 }
 
-/* main grid */
+/* utilities */
 
-/* .main-grid { */
-/*     display: grid; */
-/*     gap: var(--s-400); */
-/*     grid-template-columns: 15% auto; */
-/* } */
+.container {
+    --max-width: 120rem;
+    --padding: 1rem;
+
+    margin-inline: auto;
+    width: min(var(--max-width), 100% - (var(--padding) * 2));
+}

@@ -39,42 +39,59 @@ pub fn App() -> Html {
     // TODO: Help button to the right side of the search explaining how search works
     // TODO: logo and github logo should not be selectable
     // TODO: Find logo for button.saved-sessions-order-button
+    // TODO: Load sessions from localstorage.
 
+    // FIX: Add keys to list items: https://yew.rs/docs/concepts/html/lists#keyed-lists
     // FIX: I'm not really sure if my usages of <section> are correct.
-    // FIX: Calculate once and load from file.
-    let saved_sessions = [
-        Session::new("New Puppy!", days_ago(6), 8, "important"),
-        Session::new("Books", days_ago(8), 19, "hobbie"),
-        Session::new("Funny", days_ago(8), 7, "hobbie"),
-    ]
-    .into_iter()
-    .enumerate()
-    .map(|(i, s)| {
-        html! {
-          <li class="session-list-item" selected={if i == 0 { true } else { false }}>
-            <button class="session-box">
-              <h3>{s.name}</h3>
-              <ul class="session-box-info-list" role="list">
-                <li>
-                  <span>{"Saved "}</span>
-                  <time datetime={s.date.to_string()}>
-                    {format!("{} days ago", (Utc::now().date_naive() - s.date).num_days())}
-                  </time>
-                </li>
-                <li>{s.label}</li>
-                <li>{format!("{} Tabs", s.tabs_count)}</li>
-              </ul>
-            </button>
-          </li>
-        }
-    });
+
+    let saved_sessions = use_state(|| Html::default());
+    {
+        let saved_sessions = saved_sessions.clone();
+
+        use_effect_with_deps(
+            move |_| {
+                let saved_sessions = saved_sessions.clone();
+
+                saved_sessions.set([
+                    Session::new("New Puppy!", days_ago(6), 8, "important"),
+                    Session::new("Books", days_ago(8), 19, "hobbie"),
+                    Session::new("Funny", days_ago(8), 7, "hobbie"),
+                ]
+                .into_iter()
+                .enumerate()
+                .map(|(i, s)| {
+                    html! {
+                      <li class="session-list-item" selected={if i == 0 { true } else { false }}>
+                        <button class="session-box">
+                          <h3>{s.name}</h3>
+                          <ul class="session-box-info-list" role="list">
+                            <li>
+                              <span>{"Saved "}</span>
+                              <time datetime={s.date.to_string()}>
+                                {format!("{} days ago", (Utc::now().date_naive() - s.date).num_days())}
+                              </time>
+                            </li>
+                            <li>{s.label}</li>
+                            <li>{format!("{} Tabs", s.tabs_count)}</li>
+                          </ul>
+                        </button>
+                      </li>
+                    }
+                })
+                .collect());
+
+                || ()
+            },
+            (),
+        );
+    }
 
     html! {
         <>
           <header class="primary-header">
             <div class="container">
-              <div class="nav-flex">
-                <a class="nav-logo" href="https://github.com/UserIsntAvailable/wasme"
+              <div class="header-flex">
+                <a class="header-logo" href="https://github.com/UserIsntAvailable/wasme"
                   >{"WASME"}</a
                 >
                 <form action="">
@@ -84,28 +101,26 @@ pub fn App() -> Html {
                     type="search"
                   />
                 </form>
-                <nav>
-                  <ul class="nav-button-list" role="list">
-                    <li>
-                      <a class="nav-button" href="https://github.com/UserIsntAvailable">
-                        <img src="icons/github-mark.svg" alt="Creator's github page" />
-                      </a>
-                    </li>
-                    <li>
-                      <button class="nav-button">
-                        <img
-                          src="icons/sun.png"
-                          alt="Switch between dark and light mode"
-                        />
-                      </button>
-                    </li>
-                    <li>
-                      <button class="nav-button">
-                        <img src="icons/nut.png" alt="Settings" />
-                      </button>
-                    </li>
-                  </ul>
-                </nav>
+                <ul class="header-button-list" role="list">
+                  <li>
+                    <a class="header-button" href="https://github.com/UserIsntAvailable">
+                      <img src="icons/github-mark.svg" alt="Creator's github page" />
+                    </a>
+                  </li>
+                  <li>
+                    <button class="header-button">
+                      <img
+                        src="icons/sun.png"
+                        alt="Switch between dark and light mode"
+                      />
+                    </button>
+                  </li>
+                  <li>
+                    <button class="header-button">
+                      <img src="icons/nut.png" alt="Settings" />
+                    </button>
+                  </li>
+                </ul>
               </div>
             </div>
           </header>
@@ -129,7 +144,7 @@ pub fn App() -> Html {
                       <button class="saved-sessions-order-button">{"Order by"}</button>
                     </header>
                     <ul class="session-list" role="list">
-                      { for saved_sessions }
+                      { (*saved_sessions).clone() }
                     </ul>
                   </section>
                 </section>
@@ -142,7 +157,10 @@ pub fn App() -> Html {
                     </div>
                   </div>
                   <ul class="middle-info" role="list">
-                    <li><time datetime="2017-06-12 13:21">{"Saved 06/12/2017 1:21 PM"}</time></li>
+                    <li>
+                      <span>{"Saved "}</span>
+                      <time datetime="2017-06-12 13:21">{"06/12/2017 1:21 PM"}</time>
+                    </li>
                     <li>{"important"}</li>
                     <li>{"2 Windows"}</li>
                     <li>{"7 Tabs"}</li>

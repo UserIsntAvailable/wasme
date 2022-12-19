@@ -37,12 +37,19 @@ pub fn App() -> Html {
     // TODO: Find better Font
     // TODO: SVG logo for page
     // TODO: Help button to the right side of the search explaining how search works
-    // TODO: logo and github logo should not be selectable
+    // TODO: Logo and github logo should not be selectable
     // TODO: Load sessions from localstorage
-    // TODO: How to place heading (h*) tags
-    // TODO: Include images for tab items
-    // TODO: tab items should be <a>
+    // TODO: How to better place heading (h*) tags
+    // TODO: Include page icon for tab items
+    // TODO: Tab items should be <a>
+    // TODO: Toggle to expand windows tabs
+    // TODO: Find better design for `session__items > *`
+    // TODO: Responsive Layout
 
+    // FIX: Accessibility
+    // FIX: Long `session__title` and `session__label` names break the grid layout.
+    // FIX: Images get smaller with small screen sizes ( I think that is the normal behaviour of
+    // flex ).
     // FIX: Add keys to list items: https://yew.rs/docs/concepts/html/lists#keyed-lists
     // FIX: I'm not really sure if my usages of <section> are correct.
 
@@ -55,9 +62,9 @@ pub fn App() -> Html {
                 let saved_sessions = saved_sessions.clone();
 
                 saved_sessions.set([
-                    Session::new("New Puppy!", days_ago(6), 8, "important"),
-                    Session::new("Books", days_ago(8), 19, "hobbie"),
-                    Session::new("Funny", days_ago(8), 7, "hobbie"),
+                    Session::new("New Puppy!", days_ago(6), 8, "Important"),
+                    Session::new("Books", days_ago(8), 19, "Hobbie"),
+                    Session::new("Funny", days_ago(8), 7, "Hobbie"),
                 ]
                 .into_iter()
                 .enumerate()
@@ -65,9 +72,9 @@ pub fn App() -> Html {
                     html! {
                       <li class="session-list-item" selected={if i == 0 { true } else { false }}>
                         <button class="box button">
-                          <div class="fs-session-box-name">{s.name}</div>
-                          <ul class="session-box-info-list" role="list">
-                            <li>
+                          <div class="box__title">{s.name}</div>
+                          <ul class="box__items" role="list">
+                            <li class="box__items__date">
                               <span>
                                 {"Saved "}
                                 <time datetime={s.date.to_string()}>
@@ -75,8 +82,8 @@ pub fn App() -> Html {
                                 </time>
                               </span>
                             </li>
-                            <li>{s.label}</li>
-                            <li>{format!("{} Tabs", s.tabs_count)}</li>
+                            <li class="box__items__label">{s.label}</li>
+                            <li class="box__items__tabs">{format!("{} Tabs", s.tabs_count)}</li>
                           </ul>
                         </button>
                       </li>
@@ -92,9 +99,9 @@ pub fn App() -> Html {
 
     html! {
         <>
-          <header class="primary-header margin-bottom-300" style="background-color: pink;">
+          <header class="primary-header margin-bottom-300">
             <div class="container">
-              <div class="flex">
+              <div class="flex-centered">
                 <a class="header-logo" href="https://github.com/UserIsntAvailable/wasme"
                   >{"WASME"}</a
                 >
@@ -105,26 +112,17 @@ pub fn App() -> Html {
                     type="search"
                   />
                 </form>
-                <ul class="header-button-list" role="list">
-                  <li>
-                    <a class="button" href="https://github.com/UserIsntAvailable">
-                      <img src="icons/github-mark.svg" alt="Creator's github page" />
-                    </a>
-                  </li>
-                  <li>
-                    <button class="button">
-                      <img
-                        src="icons/sun.png"
-                        alt="Switch between dark and light mode"
-                      />
-                    </button>
-                  </li>
-                  <li>
-                    <button class="button">
-                      <img src="icons/nut.png" alt="Settings" />
-                    </button>
-                  </li>
-                </ul>
+                <div class="flex">
+                  <a class="button" href="https://github.com/UserIsntAvailable">
+                    <img src="icons/github-mark.svg" alt="Creator's github page" />
+                  </a>
+                  <button class="button">
+                    <img src="icons/sun.png" alt="Switch between dark and light mode" />
+                  </button>
+                  <button class="button">
+                    <img src="icons/nut.png" alt="Settings" />
+                  </button>
+                </div>
               </div>
             </div>
           </header>
@@ -135,18 +133,18 @@ pub fn App() -> Html {
                 <div>
                   <section class="margin-bottom-600">
                     <header class="margin-bottom-200">
-                      <div class="fs-sec-heading">{"Current Session"}</div>
+                      <h2 class="fs-sec-heading">{"Current Session"}</h2>
                     </header>
                     <button class="box button">
-                      <div class="fs-session-box-name">{"Changed a few seconds ago"}</div>
-                      <ul class="session-box-info-list" role="list">
-                        <li>{"4 Tabs"}</li>
+                      <div class="box__title">{"Changed a few seconds ago"}</div>
+                      <ul class="box__items" role="list">
+                        <li class="box__items__tabs" style="grid-area: date; text-align: left;">{"4 Tabs"}</li>
                       </ul>
                     </button>
                   </section>
                   <section class="saved-sessions">
                     <header class="flex margin-bottom-200">
-                      <div class="fs-sec-heading">{"Saved Sessions"}</div>
+                      <h2 class="fs-sec-heading">{"Saved Sessions"}</h2>
                       <button class="button"><img src="icons/sort.png" alt=""/></button>
                     </header>
                     <ul class="session-list" role="list">
@@ -155,15 +153,15 @@ pub fn App() -> Html {
                   </section>
                 </div>
                 <section class="selected-session">
-                  <div class="margin-bottom-400">
-                    <header><div class="session__name fs-sec-heading">{"New Puppy!"}</div></header>
-                    <div class="top-info-buttons">
+                  <div class="flex margin-bottom-300">
+                    <header><div class="fs-pri-heading fw-bolder">{"New Puppy!"}</div></header>
+                    <div class="flex">
                       <button class="button"><img src="icons/share.png" /></button>
                       <button class="button"><img src="icons/download.png" /></button>
                       <button class="button"><img src="icons/edit.png" /></button>
                     </div>
                   </div>
-                  <ul class="margin-bottom-400" role="list">
+                  <ul class="session__items margin-bottom-600" role="list">
                     <li class="session__date">
                       <span>
                         {"Saved "}
@@ -174,10 +172,10 @@ pub fn App() -> Html {
                     <li>{"2 Windows"}</li>
                     <li>{"7 Tabs"}</li>
                   </ul>
-                  <div class="bottom-info">
+                  <div class="margin-bottom-400">
                     <ul class="session__windows" role="list">
                       <li class="margin-bottom-600">
-                        <div class="fs-ter-heading td-underline margin-bottom-200">{"Training"}</div>
+                        <div class="fs-ter-heading margin-bottom-200 text-dec-underline">{"Training"}</div>
                         <ul class="session__windows__tabs" role="list">
                           <li>{"How to Train a Puppy"}</li>
                           <li>{"Starting your puppy off right"}</li>
@@ -185,7 +183,7 @@ pub fn App() -> Html {
                         </ul>
                       </li>
                       <li class="margin-bottom-600">
-                        <div class="fs-ter-heading td-underline margin-bottom-200">{"Food"}</div>
+                        <div class="fs-ter-heading margin-bottom-200 text-dec-underline">{"Food"}</div>
                         <ul class="session__windows__tabs" role="list">
                           <li>{"Healthy Development Puppy Food"}</li>
                           <li>{"Pet Food & Threats"}</li>

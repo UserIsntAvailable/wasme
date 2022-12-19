@@ -38,8 +38,10 @@ pub fn App() -> Html {
     // TODO: SVG logo for page
     // TODO: Help button to the right side of the search explaining how search works
     // TODO: logo and github logo should not be selectable
-    // TODO: Find logo for button.saved-sessions-order-button
-    // TODO: Load sessions from localstorage.
+    // TODO: Load sessions from localstorage
+    // TODO: How to place heading (h*) tags
+    // TODO: Include images for tab items
+    // TODO: tab items should be <a>
 
     // FIX: Add keys to list items: https://yew.rs/docs/concepts/html/lists#keyed-lists
     // FIX: I'm not really sure if my usages of <section> are correct.
@@ -62,14 +64,16 @@ pub fn App() -> Html {
                 .map(|(i, s)| {
                     html! {
                       <li class="session-list-item" selected={if i == 0 { true } else { false }}>
-                        <button class="session-box">
-                          <h3>{s.name}</h3>
+                        <button class="box button">
+                          <div class="fs-session-box-name">{s.name}</div>
                           <ul class="session-box-info-list" role="list">
                             <li>
-                              <span>{"Saved "}</span>
-                              <time datetime={s.date.to_string()}>
-                                {format!("{} days ago", (Utc::now().date_naive() - s.date).num_days())}
-                              </time>
+                              <span>
+                                {"Saved "}
+                                <time datetime={s.date.to_string()}>
+                                  {format!("{} days ago", (Utc::now().date_naive() - s.date).num_days())}
+                                </time>
+                              </span>
                             </li>
                             <li>{s.label}</li>
                             <li>{format!("{} Tabs", s.tabs_count)}</li>
@@ -88,9 +92,9 @@ pub fn App() -> Html {
 
     html! {
         <>
-          <header class="primary-header">
+          <header class="primary-header margin-bottom-300" style="background-color: pink;">
             <div class="container">
-              <div class="header-flex">
+              <div class="flex">
                 <a class="header-logo" href="https://github.com/UserIsntAvailable/wasme"
                   >{"WASME"}</a
                 >
@@ -103,12 +107,12 @@ pub fn App() -> Html {
                 </form>
                 <ul class="header-button-list" role="list">
                   <li>
-                    <a class="header-button" href="https://github.com/UserIsntAvailable">
+                    <a class="button" href="https://github.com/UserIsntAvailable">
                       <img src="icons/github-mark.svg" alt="Creator's github page" />
                     </a>
                   </li>
                   <li>
-                    <button class="header-button">
+                    <button class="button">
                       <img
                         src="icons/sun.png"
                         alt="Switch between dark and light mode"
@@ -116,7 +120,7 @@ pub fn App() -> Html {
                     </button>
                   </li>
                   <li>
-                    <button class="header-button">
+                    <button class="button">
                       <img src="icons/nut.png" alt="Settings" />
                     </button>
                   </li>
@@ -128,56 +132,61 @@ pub fn App() -> Html {
           <main>
             <div class="container">
               <div class="main-split">
-                <section class="sessions-info">
-                  <section class="current-session">
-                    <header><h2>{"Current Session"}</h2></header>
-                    <button class="session-box">
-                      <h3>{"Changed a few seconds ago"}</h3>
+                <div>
+                  <section class="margin-bottom-600">
+                    <header class="margin-bottom-200">
+                      <div class="fs-sec-heading">{"Current Session"}</div>
+                    </header>
+                    <button class="box button">
+                      <div class="fs-session-box-name">{"Changed a few seconds ago"}</div>
                       <ul class="session-box-info-list" role="list">
                         <li>{"4 Tabs"}</li>
                       </ul>
                     </button>
                   </section>
                   <section class="saved-sessions">
-                    <header>
-                      <h2>{"Saved Sessions"}</h2>
-                      <button class="saved-sessions-order-button">{"Order by"}</button>
+                    <header class="flex margin-bottom-200">
+                      <div class="fs-sec-heading">{"Saved Sessions"}</div>
+                      <button class="button"><img src="icons/sort.png" alt=""/></button>
                     </header>
                     <ul class="session-list" role="list">
                       { (*saved_sessions).clone() }
                     </ul>
                   </section>
-                </section>
-                <section class="selected-session-info">
-                  <div class="top-info">
-                    <header><h1 class="session-title">{"New Puppy!"}</h1></header>
+                </div>
+                <section class="selected-session">
+                  <div class="margin-bottom-400">
+                    <header><div class="session__name fs-sec-heading">{"New Puppy!"}</div></header>
                     <div class="top-info-buttons">
-                      <button>{"OPEN"}</button>
-                      <button>{"..."}</button>
+                      <button class="button"><img src="icons/share.png" /></button>
+                      <button class="button"><img src="icons/download.png" /></button>
+                      <button class="button"><img src="icons/edit.png" /></button>
                     </div>
                   </div>
-                  <ul class="middle-info" role="list">
-                    <li>
-                      <span>{"Saved "}</span>
-                      <time datetime="2017-06-12 13:21">{"06/12/2017 1:21 PM"}</time>
+                  <ul class="margin-bottom-400" role="list">
+                    <li class="session__date">
+                      <span>
+                        {"Saved "}
+                        <time datetime="2017-06-12 13:21">{"06/12/2017 1:21 PM"}</time>
+                      </span>
                     </li>
                     <li>{"important"}</li>
                     <li>{"2 Windows"}</li>
                     <li>{"7 Tabs"}</li>
                   </ul>
                   <div class="bottom-info">
-                    <ul class="session-windows-list" role="list">
-                      <li class="session-windows-list-item">
-                        <h2>{"Training"}</h2>
-                        <ul class="session-windows-tabs-list" role="list">
+                    <ul class="session__windows" role="list">
+                      <li class="margin-bottom-600">
+                        <div class="fs-ter-heading td-underline margin-bottom-200">{"Training"}</div>
+                        <ul class="session__windows__tabs" role="list">
                           <li>{"How to Train a Puppy"}</li>
                           <li>{"Starting your puppy off right"}</li>
                           <li>{"Dog Training Basics"}</li>
                         </ul>
                       </li>
-                      <li class="session-windows-list-item">
-                        <h2>{"Food"}</h2>
-                        <ul class="session-windows-tabs-list" role="list">
+                      <li class="margin-bottom-600">
+                        <div class="fs-ter-heading td-underline margin-bottom-200">{"Food"}</div>
+                        <ul class="session__windows__tabs" role="list">
                           <li>{"Healthy Development Puppy Food"}</li>
                           <li>{"Pet Food & Threats"}</li>
                           <li>{"Chicken Fillets Dog Treats"}</li>

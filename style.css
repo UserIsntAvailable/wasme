@@ -16,8 +16,14 @@
     --fw-bold: 500;
     --fw-bolder: 700;
 
+    --fs-300: 0.8125rem;
     --fs-400: 1rem;
+    --fs-500: 1.0725rem;
+    --fs-600: 1.5rem;
     --fs-700: 2rem;
+
+    --fs-sec-heading: var(--fs-600);
+    --fs-ter-heading: var(--fs-500);
 
     --s-100: .25rem;
     --s-200: .5rem;
@@ -100,13 +106,30 @@ body {
     font-size: var(--fs-400);
 }
 
-/* header */
-
-.header-flex {
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
+img {
+    width: var(--s-600);
 }
+
+/* components */
+
+.button {
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.box {
+    --margin: var(--s-100);
+
+    /* TEST: Put on the top of button when finished */
+    border: 1px solid rgb(0, 0, 0);
+    margin: var(--margin) 0 var(--margin) 0;
+    width: 38ch;
+    padding: var(--s-400);
+}
+
+/* header */
 
 .header-logo {
     color: var(--c-neutral-900);
@@ -122,6 +145,7 @@ body {
     border-radius: 100vmax;
     border: 0;
     padding: var(--s-100) var(--s-300);
+    /* FIX: https://stackoverflow.com/questions/17302794/how-to-set-an-input-width-to-match-the-placeholder-text-width */
     width: 53.25ch;
 }
 
@@ -140,13 +164,22 @@ body {
     gap: var(--s-400);
 }
 
-.header-button {
-    background-color: transparent;
-    border: 0;
-    cursor: pointer;
-    display: flex;
-    text-decoration: none;
-    width: var(--s-600);
+.header-button-list > * {
+    display: inline-flex;
+}
+
+.session-box-info-list > * {
+    display: inline-flex;
+}
+
+/* selected session info */
+
+.session__name {
+    font-weight: var(--fw-bolder);
+}
+
+.session__windows__tabs > * {
+    padding-left: var(--s-500);
 }
 
 /* utilities */
@@ -157,4 +190,42 @@ body {
 
     margin-inline: auto;
     width: min(var(--max-width), 100% - (var(--padding) * 2));
+}
+
+.flex {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.fs-sec-heading {
+    font-size: var(--fs-sec-heading);
+}
+
+.fs-ter-heading {
+    font-size: var(--fs-ter-heading);
+}
+
+.fs-session-box-name {
+    font-size: var(--fs-500);
+}
+
+.margin-bottom-200 {
+    margin-block-end: var(--s-200);
+}
+
+.margin-bottom-300 {
+    margin-block-end: var(--s-300);
+}
+
+.margin-bottom-400 {
+    margin-block-end: var(--s-400);
+}
+
+.margin-bottom-600 {
+    margin-block-end: var(--s-600);
+}
+
+.td-underline {
+    text-decoration: underline;
 }

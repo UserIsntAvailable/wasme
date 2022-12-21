@@ -1,11 +1,13 @@
 use yew::prelude::*;
+use yew_hooks::use_bool_toggle;
 
 #[derive(Properties, PartialEq)]
 pub struct Props {
     // TODO: Add aria-controls prop later.
     pub children: Children,
     pub id: Option<&'static str>,
-    pub default: Option<bool>,
+    #[prop_or_default]
+    pub default: bool,
     pub ontoggle: Callback<bool>,
     pub purpose: &'static str,
 }
@@ -20,17 +22,15 @@ pub fn ButtonToggle(
         purpose,
     }: &Props,
 ) -> Html {
-    let toggle = use_state(|| default.unwrap_or(false));
+    let toggle = use_bool_toggle(*default);
 
     let onclick = {
         let toggle = toggle.clone();
         let ontoggle = ontoggle.clone();
 
         Callback::from(move |_| {
-            let current = *toggle;
-
-            ontoggle.emit(current);
-            toggle.set(!current);
+            toggle.toggle();
+            ontoggle.emit(*toggle);
         })
     };
 

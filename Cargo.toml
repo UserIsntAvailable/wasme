@@ -25,6 +25,7 @@ rgb = { version = "0.8.34", features = ["serde"] }
 serde = "1.0.150"
 serde_json = "1.0.89"
 url = { version = "2.3.1", features = ["serde"] }
+web-sys = { version = "0.3.60", features = ["SubmitEvent"] }
 yew = { version = "0.20.0", features = ["csr"] }
 
 [build-dependencies]

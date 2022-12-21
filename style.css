@@ -164,7 +164,7 @@ img {
 
 /* header */
 
-.primary-header {
+.main-header {
     padding-block: var(--s-100);
 }
 
@@ -223,6 +223,7 @@ img {
 
 /* utilities */
 
+
 .container {
     --max-width: 120rem;
     --padding: 1rem;
@@ -277,4 +278,17 @@ img {
 
 .text-dec-underline {
     text-decoration: underline;
+}
+
+
+.visually-hidden {
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
 }

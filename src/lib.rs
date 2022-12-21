@@ -1,3 +1,6 @@
+mod components;
+
+use crate::components::{*, main_header::MainHeader};
 use chrono::{offset::Utc, Days, NaiveDate};
 use yew::prelude::*;
 
@@ -45,6 +48,7 @@ pub fn App() -> Html {
     // TODO: Toggle to expand windows tabs
     // TODO: Find better design for `session__items > *`
     // TODO: Responsive Layout
+    // TODO: Skip link
 
     // FIX: Accessibility
     // FIX: Long `session__title` and `session__label` names break the grid layout.
@@ -99,36 +103,10 @@ pub fn App() -> Html {
 
     html! {
         <>
-          <header class="primary-header margin-bottom-300">
-            <div class="container">
-              <div class="flex-centered">
-                <a class="header-logo" href="https://github.com/UserIsntAvailable/wasme"
-                  >{"WASME"}</a
-                >
-                <form action="">
-                  <input
-                    class="header-search-bar"
-                    placeholder="Search the name of a label, session, window or tab"
-                    type="search"
-                  />
-                </form>
-                <div class="flex">
-                  <a class="button" href="https://github.com/UserIsntAvailable">
-                    <img src="icons/github-mark.svg" alt="Creator's github page" />
-                  </a>
-                  <button class="button">
-                    <img src="icons/sun.png" alt="Switch between dark and light mode" />
-                  </button>
-                  <button class="button">
-                    <img src="icons/nut.png" alt="Settings" />
-                  </button>
-                </div>
-              </div>
-            </div>
-          </header>
+          <MainHeader />
 
           <main>
-            <div class="container">
+            <Container>
               <div class="main-split">
                 <div>
                   <section class="margin-bottom-600">
@@ -195,7 +173,7 @@ pub fn App() -> Html {
                   </div>
                 </section>
               </div>
-            </div>
+            </Container>
           </main>
         </>
     }

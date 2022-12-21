@@ -6,6 +6,9 @@ use yew::prelude::*;
 
 #[function_component]
 pub fn MainHeader() -> Html {
+    // TODO: svg logo for page.
+    // TODO: header-logo and github-logo should not be selectable.
+
     html! {
       <header class={classes!("main-header", "margin-bottom-300")}>
         <Container>

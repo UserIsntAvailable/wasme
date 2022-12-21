@@ -2,7 +2,10 @@ use yew::prelude::*;
 
 #[function_component]
 pub fn SearchBar() -> Html {
-    // TODO: Handle search.
+    // TODO: Search button
+    // TODO: Search prompt
+    // TODO: Section explaining search on search prompt
+
     let on_submit = Callback::from(|e: SubmitEvent| e.prevent_default());
 
     html! {

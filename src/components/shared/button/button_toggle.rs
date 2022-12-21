@@ -35,7 +35,7 @@ pub fn ButtonToggle(
     };
 
     html! {
-      <button id={id.clone()} class="button" onclick={onclick} aria-expanded={toggle.to_string()}>
+      <button id={id.clone()} class="button" onclick={onclick} aria-pressed={toggle.to_string()}>
         { for children.iter() }
         <span class="visually-hidden">{purpose}</span>
       </button>

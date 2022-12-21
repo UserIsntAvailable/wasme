@@ -1,6 +1,6 @@
 mod components;
 
-use crate::components::{*, main_header::MainHeader};
+use crate::components::{*, header::MainHeader};
 use chrono::{offset::Utc, Days, NaiveDate};
 use yew::prelude::*;
 

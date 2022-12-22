@@ -1,6 +1,6 @@
 mod components;
 
-use crate::components::{header::MainHeader, main::Main, *};
+use crate::components::{header::MainHeader, main::Main};
 use yew::prelude::*;
 
 #[function_component]

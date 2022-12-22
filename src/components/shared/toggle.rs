@@ -13,7 +13,7 @@ pub struct Props {
 }
 
 #[function_component]
-pub fn ButtonToggle(
+pub fn Toggle(
     Props {
         id,
         children,

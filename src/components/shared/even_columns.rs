@@ -6,9 +6,9 @@ pub struct Props {
 }
 
 #[function_component]
-pub fn ButtonGroup(Props { children }: &Props) -> Html {
+pub fn EvenColumns(Props { children }: &Props) -> Html {
     html! {
-      <div id="button-group" class="flex">
+      <div id="button-group" class="even-columns">
         { for children.iter() }
       </div>
     }

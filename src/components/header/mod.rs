@@ -17,12 +17,12 @@ pub fn MainHeader() -> Html {
               >{"WASME"}
             </a>
             <SearchBar />
-            <ButtonGroup>
+            <EvenColumns>
               <a class="button" target="_blank" href="https://github.com/UserIsntAvailable">
                 <img alt="(opens in new tab)" src="icons/github-mark.svg" />
                 <span class="visually-hidden">{"Creator's Github Page"}</span>
               </a>
-              <ButtonToggle
+              <Toggle
                 ontoggle={
                   // TODO: Swap icon and theme
                   Callback::default()
@@ -30,8 +30,8 @@ pub fn MainHeader() -> Html {
                 purpose={"Change between light and dark theme"}
               >
                 <img src="icons/sun.png" alt="" />
-              </ButtonToggle>
-              <ButtonToggle
+              </Toggle>
+              <Toggle
                 ontoggle={
                   // TODO: Pop up settings menu
                   Callback::default()
@@ -39,8 +39,8 @@ pub fn MainHeader() -> Html {
                 purpose={"Opens settings menu"}
               >
                 <img src="icons/nut.png" alt="" />
-              </ButtonToggle>
-            </ButtonGroup>
+              </Toggle>
+            </EvenColumns>
           </div>
         </Container>
       </header>

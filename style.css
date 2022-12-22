@@ -204,20 +204,18 @@ img {
 
 /* selected session */
 
-.session__items {
+.selected-session__metadata {
     display: flex;
     flex-wrap: wrap;
     gap: var(--s-100);
 }
 
-.session__items > * {
-    --padding: var(--s-100);
-
+.selected-session__metadata > * {
     border: 1px solid var(--c-neutral-900);
-    padding: 0 var(--padding) 0 var(--padding);
+    padding: 0 var(--s-100);
 }
 
-.session__windows__tabs > * {
+.selected-session__windows__tabs > * {
     padding-left: var(--s-500);
 }
 

@@ -1,3 +1,4 @@
+pub mod main;
 pub mod header;
 mod shared;
 

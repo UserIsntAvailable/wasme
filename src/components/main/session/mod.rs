@@ -50,7 +50,7 @@ fn SavedSessions() -> Html {
             }
             purpose={"Sort saved sessions by:"}
           >
-            <img src="icons/sort.png" alt="" />
+            <Img src="icons/sort.png" />
           </Toggle>
         </SessionHeader>
         <ul id="saved-sessions-list" role="list">
@@ -113,7 +113,7 @@ pub fn SelSession() -> Html {
               }
               purpose={"Opens this session's windows"}
             >
-              <img src="icons/share.png" alt="" />
+              <Img src="icons/share.png" />
             </Button>
             <Button
               onclick={
@@ -122,7 +122,7 @@ pub fn SelSession() -> Html {
               }
               purpose={"Downloads a json representation of this section"}
             >
-              <img src="icons/download.png" alt="" />
+              <Img src="icons/download.png" />
             </Button>
             <Button
               onclick={
@@ -131,7 +131,7 @@ pub fn SelSession() -> Html {
               }
               purpose={"Enter edit mode to modify values from this section"}
             >
-              <img src="icons/edit.png" alt="" />
+              <Img src="icons/edit.png" />
             </Button>
           </EvenColumns>
         </div>

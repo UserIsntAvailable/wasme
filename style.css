@@ -109,12 +109,12 @@ body {
     font-size: var(--fs-400);
 }
 
-img {
-    width: var(--s-600);
-    aspect-ratio: 1 / 1;
-}
-
 /* components */
+
+.svg-icon {
+    width: var(--s-600);
+    display: block;
+}
 
 .button {
     background-color: transparent;
@@ -220,7 +220,6 @@ img {
 }
 
 /* utilities */
-
 
 .container {
     --max-width: 120rem;

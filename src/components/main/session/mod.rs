@@ -43,14 +43,22 @@ fn SavedSessions() -> Html {
     html! {
       <section id="saved-sessions">
         <SessionHeader text="Saved Sessions">
+          // FIX: This should use `aria-expanded`.
           <Toggle
             ontoggle={
-              // TODO: Pop up saved sessions sort menu
+              // TODO: Toggle saved sessions sort menu
               Callback::default()
             }
             purpose={"Sort saved sessions by:"}
           >
-            <Img src="icons/sort.png" />
+            <Svg viewBox="0 0 200 200">
+              <Path d="M110.22,117.75h-80a10,10,0,0,0,0,20h80a10,10,0,0,0,0-20Z" />
+              <Path
+                d="M177.22,125.75a9.67,9.67,0,0,0-14,0l-8,7.5V42.75a10,10,0,0,0-20,0v113.5a8.29,8.29,0,0,0,3,8,9.67,9.67,0,0,0,14,0l24.5-24.5a10.13,10.13,0,0,0,.5-14Z"
+              />
+              <Path d="M110.22,37.75h-80a10,10,0,0,0,0,20h80a10,10,0,0,0,0-20Z" />
+              <Path d="M30.22,97.75h70a10,10,0,0,0,0-20h-70a10,10,0,0,0,0,20Z" />
+            </Svg>
           </Toggle>
         </SessionHeader>
         <ul id="saved-sessions-list" role="list">
@@ -111,28 +119,40 @@ pub fn SelSession() -> Html {
                 // TODO: Open selected session.
                 Callback::default()
               }
-              purpose={"Opens this session's windows"}
+              purpose={"Opens all selected session's windows"}
             >
-              <Img src="icons/share.png" />
+              <Svg>
+                <Path
+                  d="M8.416,3.943l1.12-1.12v9.031c0,0.257,0.208,0.464,0.464,0.464c0.256,0,0.464-0.207,0.464-0.464V2.823l1.12,1.12c0.182,0.182,0.476,0.182,0.656,0c0.182-0.181,0.182-0.475,0-0.656l-1.744-1.745c-0.018-0.081-0.048-0.16-0.112-0.224C10.279,1.214,10.137,1.177,10,1.194c-0.137-0.017-0.279,0.02-0.384,0.125C9.551,1.384,9.518,1.465,9.499,1.548L7.76,3.288c-0.182,0.181-0.182,0.475,0,0.656C7.941,4.125,8.234,4.125,8.416,3.943z
+                  M15.569,6.286h-2.32v0.928h2.32c0.512,0,0.928,0.416,0.928,0.928v8.817c0,0.513-0.416,0.929-0.928,0.929H4.432c-0.513,0-0.928-0.416-0.928-0.929V8.142c0-0.513,0.416-0.928,0.928-0.928h2.32V6.286h-2.32c-1.025,0-1.856,0.831-1.856,1.856v8.817c0,1.025,0.832,1.856,1.856,1.856h11.138c1.024,0,1.855-0.831,1.855-1.856V8.142C17.425,7.117,16.594,6.286,15.569,6.286z"
+                />
+              </Svg>
             </Button>
-            <Button
-              onclick={
-                // TODO: Download selected session.
+            // FIX: This should use `aria-expanded`.
+            <Toggle
+              ontoggle={
+                // TODO: Toggle selected section extra menu.
                 Callback::default()
               }
-              purpose={"Downloads a json representation of this section"}
+              purpose={"Extra menu to edit, download or delele the selected session"}
             >
-              <Img src="icons/download.png" />
-            </Button>
-            <Button
-              onclick={
-                // TODO: Edit selected session.
-                Callback::default()
-              }
-              purpose={"Enter edit mode to modify values from this section"}
-            >
-              <Img src="icons/edit.png" />
-            </Button>
+              <Svg>
+                <Path
+                  d="M3.936,7.979c-1.116,0-2.021,0.905-2.021,2.021s0.905,2.021,2.021,2.021S5.957,11.116,5.957,10
+                  S5.052,7.979,3.936,7.979z
+                  M3.936,11.011c-0.558,0-1.011-0.452-1.011-1.011s0.453-1.011,1.011-1.011S4.946,9.441,4.946,10
+                  S4.494,11.011,3.936,11.011z
+                  M16.064,7.979c-1.116,0-2.021,0.905-2.021,2.021s0.905,2.021,2.021,2.021s2.021-0.905,2.021-2.021
+                  S17.181,7.979,16.064,7.979z
+                  M16.064,11.011c-0.559,0-1.011-0.452-1.011-1.011s0.452-1.011,1.011-1.011S17.075,9.441,17.075,10
+                  S16.623,11.011,16.064,11.011z
+                  M10,7.979c-1.116,0-2.021,0.905-2.021,2.021S8.884,12.021,10,12.021s2.021-0.905,2.021-2.021
+                  S11.116,7.979,10,7.979z
+                  M10,11.011c-0.558,0-1.011-0.452-1.011-1.011S9.442,8.989,10,8.989S11.011,9.441,11.011,10
+                  S10.558,11.011,10,11.011z"
+                />
+              </Svg>
+            </Toggle>
           </EvenColumns>
         </div>
         <ul class="selected-session__metadata margin-bottom-600" role="list">

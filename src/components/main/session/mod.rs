@@ -64,26 +64,26 @@ fn SavedSessions() -> Html {
         <ul id="saved-sessions-list" role="list">
           <li id="saved-sessions-list-item">
             <SessionButton
-              title={"New Puppy!".to_owned()}
+              title={"New Puppy!"}
               date={days_ago(6)}
               tabs={8}
-              label={"Important".to_owned()}
+              label={"Important"}
             />
           </li>
           <li id="saved-sessions-list-item">
             <SessionButton
-              title={"Books".to_owned()}
+              title={"Books"}
               date={days_ago(8)}
               tabs={19}
-              label={"Hobbie".to_owned()}
+              label={"Hobbie"}
             />
           </li>
           <li id="saved-sessions-list-item">
             <SessionButton
-              title={"Funny".to_owned()}
+              title={"Funny"}
               date={days_ago(8)}
               tabs={7}
-              label={"Hobbie".to_owned()}
+              label={"Hobbie"}
             />
           </li>
         </ul>
@@ -114,6 +114,7 @@ pub fn SelSession() -> Html {
         <div class="flex margin-bottom-300">
           <header><div class="fs-pri-heading fw-bolder">{"New Puppy!"}</div></header>
           <EvenColumns>
+            // FIX: This button should be `save session` when the current session is selected.
             <Button
               onclick={
                 // TODO: Open selected session.

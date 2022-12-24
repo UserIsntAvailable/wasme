@@ -8,8 +8,13 @@ pub struct Props {
     pub id: Option<&'static str>,
     #[prop_or_default]
     pub default: bool,
+    // FIX: Maybe this should directly take an `UseToggleHandle`.
+    //
+    // The only thing that can block that, is that `UseToggleHandle` doesn't implement `Default`, so
+    // every another component is forced to express their state using `UseToggleHandle`. Whenever I
+    // implement other `Toggle` `ontoggle` callbacks, it will be more clear if this makes sense.
     pub ontoggle: Callback<bool>,
-    pub purpose: &'static str,
+    pub purpose: String,
 }
 
 #[function_component]

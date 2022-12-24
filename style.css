@@ -8,6 +8,8 @@
     --c-neutral-100: hsl(0, 0%, 100%);
     --c-neutral-900: hsl(0, 0%, 0%);
 
+    --c-background-color: white;
+
     --ff-primary: monospace;
     --ff-body: var(--ff-primary);
     --ff-heading: var(--ff-primary);
@@ -37,6 +39,15 @@
     --s-700: 3rem;
     --s-800: 4rem;
     --s-900: 5rem;
+}
+
+/* FIX: Not suported on Firefox by default.
+*
+* Even if enabled, you need to click elsewhere to make the theme change.
+* */
+:root:has(#theme-toggle[aria-pressed="true"]) {
+    --c-background-color: #131516;
+    --c-neutral-900: #d8d4cf;
 }
 
 /* https://piccalil.li/blog/a-modern-css-reset */
@@ -104,6 +115,7 @@ picture {
 /* globals */
 
 body {
+    background-color: var(--c-background-color);
     color: var(--c-neutral-900);
     font-family: var(--ff-body);
     font-size: var(--fs-400);
@@ -121,6 +133,7 @@ body {
     border: 0;
     cursor: pointer;
     text-decoration: none;
+    color: inherit;
 }
 
 .box {

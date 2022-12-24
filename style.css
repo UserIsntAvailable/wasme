@@ -5,10 +5,9 @@
     --c-primary-500: hsl(190 90% 50%);
     --c-primary-500: hsl(190 90% 30%);
 
-    --c-neutral-100: hsl(0, 0%, 100%);
-    --c-neutral-900: hsl(0, 0%, 0%);
-
-    --c-background-color: white;
+    --c-neutral-100: hsl(0 0% 100%);
+    --c-neutral-200: hsl(0 0% 97%);
+    --c-neutral-900: hsl(0 0% 0%);
 
     --ff-primary: monospace;
     --ff-body: var(--ff-primary);
@@ -46,8 +45,9 @@
 * Even if enabled, you need to click elsewhere to make the theme change.
 * */
 :root:has(#theme-toggle[aria-pressed="true"]) {
-    --c-background-color: #131516;
-    --c-neutral-900: #d8d4cf;
+    --c-neutral-100: hsl(200 7% 8%);
+    --c-neutral-200: hsl(200 5% 12%);
+    --c-neutral-900: hsl(33 10% 83%);
 }
 
 /* https://piccalil.li/blog/a-modern-css-reset */
@@ -115,7 +115,7 @@ picture {
 /* globals */
 
 body {
-    background-color: var(--c-background-color);
+    background-color: var(--c-neutral-100);
     color: var(--c-neutral-900);
     font-family: var(--ff-body);
     font-size: var(--fs-400);
@@ -192,6 +192,7 @@ body {
 /* search bar */
 
 .header-search-bar {
+    background-color: var(--c-neutral-200);
     border-radius: 100vmax;
     border: 0;
     padding: var(--s-050) var(--s-300);
@@ -199,11 +200,8 @@ body {
     width: 53.25ch;
 }
 
-.header-search-bar:focus {
-    outline: none;
-}
-
 .header-search-bar::placeholder {
+    color: var(--c-neutral-900);
     opacity: .25;
 }
 
